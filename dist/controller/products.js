@@ -5,12 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.orderPriceInDesc = exports.orderPriceInAsc = exports.getProductBySpecifications = exports.getAllProducts = void 0;
 const express_1 = require("express");
-const router = express_1.Router();
+const router = (0, express_1.Router)();
 const products_1 = __importDefault(require("../models/products"));
 const getAllProducts = async (req, res, next) => {
     try {
-        const Allproducts = products_1.default;
-        console.log(Allproducts);
+        const Allproducts = (0, products_1.default)();
         if (!Allproducts) {
             res.status(400).json("No Products");
             return;
@@ -24,19 +23,20 @@ const getAllProducts = async (req, res, next) => {
 exports.getAllProducts = getAllProducts;
 async function getProductBySpecifications(req, res) {
     const specifications = req.query.specifications;
+    const Allproducts = (0, products_1.default)();
     try {
         if (typeof specifications === 'string') {
-            const productSpecification = products_1.default.filter((user) => user.specifications.includes(specifications));
+            const productSpecification = Allproducts.filter((user) => user.specifications.includes(specifications));
             if (productSpecification.length < 1) {
-                res.status(200).json('there is not product with such specifications');
+                res.status(400).json('there is not product with such specifications');
                 return;
             }
             res.status(200).json(productSpecification);
             return;
         }
-        const productSpecification = products_1.default.filter((user) => user.specifications.includes(...specifications));
+        const productSpecification = Allproducts.filter((user) => user.specifications.includes(...specifications));
         if (productSpecification.length < 1) {
-            res.status(200).json('there is not product with such specifications');
+            res.status(400).json('there is not product with such specifications');
             return;
         }
         res.status(200).json(productSpecification);
@@ -48,9 +48,9 @@ async function getProductBySpecifications(req, res) {
 }
 exports.getProductBySpecifications = getProductBySpecifications;
 async function orderPriceInAsc(req, res) {
-    const Allproducts = products_1.default;
+    const Allproducts = (0, products_1.default)();
     try {
-        const OrderPriceInDesc = products_1.default.sort((a, b) => a.price - b.price);
+        const OrderPriceInDesc = Allproducts.sort((a, b) => a.price - b.price);
         res.status(200).json(OrderPriceInDesc);
         return;
     }
@@ -60,9 +60,9 @@ async function orderPriceInAsc(req, res) {
 }
 exports.orderPriceInAsc = orderPriceInAsc;
 async function orderPriceInDesc(req, res) {
-    const Allproducts = products_1.default;
+    const Allproducts = (0, products_1.default)();
     try {
-        const OrderPriceInDesc = products_1.default.sort((a, b) => b.price - a.price);
+        const OrderPriceInDesc = Allproducts.sort((a, b) => b.price - a.price);
         res.status(200).json(OrderPriceInDesc);
         return;
     }

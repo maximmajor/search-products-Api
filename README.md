@@ -15,6 +15,8 @@ Technologies
 1. Nodejs
 2. Express.js
 3. Typescript
+4. Jest
+5. Supertest
 
 Documentation:
 Once you clone the project,
@@ -42,3 +44,11 @@ ROUTES:
     routes: localhost:3000/products/desc
 
 
+FOR TEST:
+    Technologies used:
+    1. Jest
+    2. supertest
+
+    To Run the test:
+    1. run yarn tsc (to get the dist folder)
+    2. run yarn test (to see the test results)

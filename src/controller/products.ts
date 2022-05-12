@@ -6,8 +6,7 @@ import Products from "../models/products"
 
 export const getAllProducts = async (req: any, res: Response, next: NextFunction) => {
     try {
-        const Allproducts = Products
-        console.log(Allproducts)
+        const Allproducts = Products()
         if (!Allproducts) {
             res.status(400).json("No Products")
             return
@@ -22,20 +21,20 @@ export const getAllProducts = async (req: any, res: Response, next: NextFunction
 
 export async function getProductBySpecifications(req: any, res: Response): Promise<void> {
     const specifications = req.query.specifications
-
+    const Allproducts = Products()
     try {
         if (typeof specifications === 'string') {
-            const productSpecification = Products.filter((user: any) => user.specifications.includes(specifications))
+            const productSpecification = Allproducts.filter((user: any) => user.specifications.includes(specifications))
             if (productSpecification.length < 1) {
-                res.status(200).json('there is not product with such specifications')
+                res.status(400).json('there is not product with such specifications')
                 return
             }
             res.status(200).json(productSpecification)
             return
         }
-        const productSpecification = Products.filter((user: any) => user.specifications.includes(...specifications))
+        const productSpecification = Allproducts.filter((user: any) => user.specifications.includes(...specifications))
         if (productSpecification.length < 1) {
-            res.status(200).json('there is not product with such specifications')
+            res.status(400).json('there is not product with such specifications')
             return
         }
         res.status(200).json(productSpecification)
@@ -47,9 +46,9 @@ export async function getProductBySpecifications(req: any, res: Response): Promi
 }
 
 export async function orderPriceInAsc(req: any, res: Response): Promise<void> {
-    const Allproducts = Products
+    const Allproducts = Products()
     try {
-        const OrderPriceInDesc = Products.sort((a, b) => a.price - b.price)
+        const OrderPriceInDesc = Allproducts.sort((a, b) => a.price - b.price)
         res.status(200).json(OrderPriceInDesc)
         return
     }
@@ -60,9 +59,9 @@ export async function orderPriceInAsc(req: any, res: Response): Promise<void> {
 
 
 export async function orderPriceInDesc(req: any, res: Response): Promise<void> {
-    const Allproducts = Products
+    const Allproducts = Products()
     try {
-        const OrderPriceInDesc = Products.sort((a, b) => b.price - a.price)
+        const OrderPriceInDesc = Allproducts.sort((a, b) => b.price - a.price)
         res.status(200).json(OrderPriceInDesc)
         return
     }
