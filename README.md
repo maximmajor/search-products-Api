@@ -41,7 +41,7 @@ ROUTES:
 
 4.  To order the Products by price in ascending order
     Request: GET
-    routes: localhost:3000/products/desc
+    routes: localhost:3000/products/asc
 
 
 FOR TEST:
