@@ -1,5 +1,4 @@
 import createError from "http-errors";
-import dotenv from "dotenv"
 import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";

@@ -7,7 +7,7 @@ import Products from "../models/products"
 export const getAllProducts = async (req: any, res: Response, next: NextFunction) => {
     try {
         const Allproducts = Products()
-        if (!Allproducts) {
+        if (Allproducts.length < 1) {
             res.status(400).json("No Products")
             return
         }

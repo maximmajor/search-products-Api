@@ -10,7 +10,7 @@ const products_1 = __importDefault(require("../models/products"));
 const getAllProducts = async (req, res, next) => {
     try {
         const Allproducts = (0, products_1.default)();
-        if (!Allproducts) {
+        if (Allproducts.length < 1) {
             res.status(400).json("No Products");
             return;
         }
